@@ -44,7 +44,7 @@ myApp.factory("googleMapsGeocoding",
     postalCode = (address.postalCode ? address.postalCode + ' ' : '');
     country = (address.country ? address.country + ' ' : '');
 
-    return fname + lname + '<br>' + telephone + '<br>' + buildingNumber + streetName + '<br>' + city + province + '<br>' + postalCode + country;
+    return fname + lname + '<br>' + telephone + '<br>' + buildingNumber + streetName + '<br>' + city + province + '<br>' + country + postalCode ;
   };
 
   return {

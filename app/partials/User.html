@@ -62,8 +62,9 @@
     <span ng-class="{'has-error':newUserForm.userType.$error.required}">
       <label for="password">User Type:</label>
       <select name="userType" ng-model="user.userType" required>
-          <option>5</option>
-          <option>1</option>
+          <option disabled>[Select]</option>
+          <option value="5">User</option>
+          <option value="1">Admin</option>
         </select>
       <div ng-messages="newUserForm.userType.$error">
         <div ng-messages-include="/partials/Utilities/ErrorMessages.html"></div>
@@ -113,6 +114,15 @@
               <label for="province">Province:</label>
               <select name="province" ng-model="user.addresses[$index].province" ng-options="province.abbreviation as province.name for province in provinces" required></select>
               <div ng-messages="address.formName['province'].$error">
+                <div ng-messages-include="/partials/Utilities/ErrorMessages.html"></div>
+              </div>
+            </span>
+          </div> 
+         <div class="form-group">
+            <span ng-class="{'has-error':addressForm_{{$index}}.country.$error.required}">
+              <label for="country">country:</label>
+              <input type="text" name="country" ng-model="user.addresses[$index].country" ng-minlength="3" required/>
+              <div ng-messages="address.formName['country'].$error">
                 <div ng-messages-include="/partials/Utilities/ErrorMessages.html"></div>
               </div>
             </span>

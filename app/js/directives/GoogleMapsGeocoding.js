@@ -3,7 +3,7 @@
 myApp.directive('googleMapsGeocoding', 
   function googleMapsGeocoding (googleMapsGeocoding, googleGeoLocation, userData, $log) {
   
-  var map, geocoder, infowindow,  markers=[], markerCount=0, addressCount=0, userCount=0, allMarkersInitiated; // keep
+  var map, geocoder, infowindow,  markers=[], markerCount=0, userCount=0, allMarkersInitiated; // keep
 
   return {
     restrict: 'E',
@@ -24,6 +24,7 @@ myApp.directive('googleMapsGeocoding',
       }
       function plotAddresses (users){
         // var users = users.slice(0,3);
+        console.dir(users);
         userCount = users.length;
         for(var i = 0; i < users.length; i++){
           var user = users[i];
@@ -39,6 +40,7 @@ myApp.directive('googleMapsGeocoding',
         }
       }
       function codeAddress (address, content) {
+        $log.log('address: ' + address);
         geocoder.geocode( { 'address': address}, function(results, status) {
           if (status == google.maps.GeocoderStatus.OK) {
             map.setCenter(results[0].geometry.location);
@@ -83,8 +85,6 @@ myApp.directive('googleMapsGeocoding',
         }
       }
       var userLocation = googleGeoLocation.getUserLocation({ returnLatLng: true }, function( locationInfo ){
-        $log.log('googleGeoLocation');
-        console.dir(locationInfo);
         initialize(locationInfo);
         getAllUsers();
       });
