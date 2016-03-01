@@ -23,7 +23,7 @@ myApp.directive('googleMapsGeocoding',
         infowindow = new google.maps.InfoWindow();
       }
       function plotAddresses (users){
-        var users = users.slice(0,3);
+        // var users = users.slice(0,3);
         userCount = users.length;
         for(var i = 0; i < users.length; i++){
           var user = users[i];

@@ -132,7 +132,7 @@ myApp.config(function($routeProvider, $locationProvider, $logProvider){
         }
       }
     })
-    .otherwise({redirect: "/login"});
+    .otherwise({redirectTo: "/login"});
     $locationProvider.html5Mode(true); // removes the hash from URL
     $logProvider.debugEnabled(true);
 });
