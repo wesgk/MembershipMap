@@ -24,7 +24,6 @@ myApp.controller('AuthController',
       $scope.redirect = 'Redirecting . . . ';
       formAlert('success');
       $timeout(function (){
-        $log.info('to call location.path(/'+ autoRedirect + ')');
         $location.path(autoRedirect);
       }, 2500);
     });
