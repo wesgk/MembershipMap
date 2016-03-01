@@ -3,7 +3,7 @@
   "description": "Employment project",
   "version": "1.0.0",
   "engines": {
-    "node": "4.2.1"
+    "node": "v4.2.1"
   },
   "main": "index.html",
   "scripts": {
