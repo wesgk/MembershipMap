@@ -96,5 +96,7 @@ app.get('/mongo/user/availability/email/:email', users.getEmailExists);
 
 app.get('*', function(req, res){ res.sendFile(rootPath + '/app/index.html'); });
 
-app.listen(9000);
-console.log('Listening on port 9000 for myApp...');
+app.listen(process.env.PORT || 9000, function(){
+  console.log("Express server listening on port %d in %s mode", this.address().port, app.settings.env);
+});
+// console.log('Listening on port 9000 for myApp...');
