@@ -1,0 +1,21 @@
+<div class="row fixed-top-content-margin">
+  <google-maps-geocoding recordsx="users" addressIndex="$index"></google-maps-geocoding>
+</div>
+
+<table class="table table-striped">
+  <tr>
+    <th ng-repeat="(i,item) in tableHeadings" 
+        ng-class="selectedColumns(i)" ng-click="changeSorting(item.column)">
+        {{item.title}}
+    </th>
+  </tr>
+  <tr ng-repeat="user in users | orderBy : sort.column : sort.descending">
+    <td><input type="checkbox" checked="true"></td>
+    <td>{{user.fname}}</td>
+    <td>{{user.lname}}</td>
+    <td>{{user.addresses[user.defaultAddress].buildingNumber}}</td>
+    <td>{{user.addresses[user.defaultAddress].streetName}}</td>
+    <td>{{user.addresses[user.defaultAddress].city}}</td>
+    <td><a href="/user/{{user._id}}" class="btn glyphicon glyphicon-edit" title="Edit"  ng-show="isAdmin"></a></td>
+  </tr>
+</table>

@@ -1,0 +1,179 @@
+<h2>{{opType}}</h2>
+
+<form name="newUserForm">
+
+  <display-message message="{{$successMessage || opType + ' Successful!'}}" alert-type="success" flash-message="false"></display-message>
+  <display-message message="{{$successMessage || 'Something Went Wrong During The ' + opType}}" alert-type="error" flash-message="false"></display-message>
+
+  <div class="form-group">
+    <span ng-class="{'has-error':newUserForm.fname.$error.required}">
+      <label for="fname">First Name:</label>
+      <input type="text" name="fname" ng-model="user.fname" ng-minlength="2" required/>
+      <div ng-messages="newUserForm.fname.$error">
+        <div ng-messages-include="/partials/Utilities/ErrorMessages.html"></div>
+      </div>
+    </span>
+  </div>
+  <div class="form-group">
+    <span ng-class="{'has-error':newUserForm.lname.$error.required}">
+      <label for="lname">Last Name:</label>
+      <input type="text" name="lname" ng-model="user.lname" ng-minlength="2" required/>
+      <div ng-messages="newUserForm.lname.$error">
+        <div ng-messages-include="/partials/Utilities/ErrorMessages.html"></div>
+      </div>
+    </span>
+  </div>
+  <div class="form-group">
+    <span ng-class="{'has-error':newUserForm.email.$error.required}">
+      <label for="email">Email:</label>
+      <input type="text" 
+              name="email" 
+              ng-model="user.email"
+              ng-minlength="5" 
+              ng-maxlength="30"
+              record-availability-validator="/mongo/user/availability/email"
+              required/>
+      <div ng-messages="newUserForm.email.$error">
+        <div ng-messages-include="/partials/Utilities/ErrorMessages.html"></div>
+        <div ng-message="recordLoading">Checking database...</div>
+        <div ng-message="recordAvailable">The email address is already in use</div>
+      </div>
+    </span>
+  </div>
+  <div class="form-group">
+    <span ng-class="{'has-error':newUserForm.telephone.$error.required}">
+      <label for="telephone">Telephone:</label>
+      <input type="text" name="telephone" ng-model="user.telephone" required ng-minlength="10">
+      <div ng-messages="newUserForm.telephone.$error">
+        <div ng-messages-include="/partials/Utilities/ErrorMessages.html"></div>
+      </div>
+    </span>
+  </div>
+  <div class="form-group">
+    <span ng-class="{'has-error':newUserForm.password.$error.required}">
+      <label for="password">Password:</label>
+      <input type="password" name="password" ng-model="user.password" required ng-minlength="4">
+      <div ng-messages="newUserForm.password.$error">
+        <div ng-messages-include="/partials/Utilities/ErrorMessages.html"></div>
+      </div>
+    </span>
+  </div>
+  <div class="form-group">
+    <span ng-class="{'has-error':newUserForm.userType.$error.required}">
+      <label for="password">User Type:</label>
+      <select name="userType" ng-model="user.userType" required>
+          <option>5</option>
+          <option>1</option>
+        </select>
+      <div ng-messages="newUserForm.userType.$error">
+        <div ng-messages-include="/partials/Utilities/ErrorMessages.html"></div>
+      </div>
+    </span>
+  </div>
+ <div ng-repeat="address in user.addresses" ng-model="user.addresses" id="panel{{$index}}" >
+    <div ng-init="address.formName='addressForm'+$index" ></div>
+    <ng-form name="address.formName">  
+      <fieldset>
+        <h3>Address <span ng-show="user.addresses.length>1">{{$index+1}}</span></h3>
+          <div class="form-group">
+            <span ng-class="">
+              <label for="apartmentNumber">Apartment Number:</label>
+              <input type="text" name="apartmentNumber" ng-model="user.addresses[$index].apartmentNumber" />
+            </span>
+          </div>
+          <div class="form-group">
+            <span ng-class="{'has-error':addressForm_{{$index}}.buildingNumber.$error.required}">
+              <label for="buildingNumber">Building Number:</label>
+              <input type="text" name="buildingNumber" ng-model="user.addresses[$index].buildingNumber" ng-minlength="1" required/>
+              <div ng-messages="address.formName['buildingNumber'].$error">
+                <div ng-messages-include="/partials/Utilities/ErrorMessages.html"></div>
+              </div>
+            </span>
+          </div>
+          <div class="form-group">
+            <span ng-class="{'has-error':addressForm_{{$index}}.streetName.$error.required}">
+              <label for="streetName">Street Name:</label>
+              <input type="text" name="streetName" ng-model="user.addresses[$index].streetName" ng-minlength="5" required/>
+              <div ng-messages="address.formName['streetName'].$error">
+                <div ng-messages-include="/partials/Utilities/ErrorMessages.html"></div>
+              </div>
+            </span>
+          </div>  
+          <div class="form-group">
+            <span ng-class="{'has-error':addressForm_{{$index}}.city.$error.required}">
+              <label for="city">City:</label>
+              <input type="text" name="city" ng-model="user.addresses[$index].city" ng-minlength="3" required/>
+              <div ng-messages="address.formName['city'].$error">
+                <div ng-messages-include="/partials/Utilities/ErrorMessages.html"></div>
+              </div>
+            </span>
+          </div> 
+          <div class="form-group">
+            <span ng-class="{'has-error':addressForm_{{$index}}.province.$error.required}">
+              <label for="province">Province:</label>
+              <select name="province" ng-model="user.addresses[$index].province" ng-options="province.abbreviation as province.name for province in provinces" required></select>
+              <div ng-messages="address.formName['province'].$error">
+                <div ng-messages-include="/partials/Utilities/ErrorMessages.html"></div>
+              </div>
+            </span>
+          </div> 
+          <div class="form-group">
+            <span ng-class="{'has-error': newUserForm.postalCode.$error.required}">
+              <label for="postalCode">Postal Code:</label>
+              <input type="text" name="postalCode" ng-model="user.addresses[$index].postalCode" ng-minlength="6" />
+            </span>
+          </div>
+          <div class="form-group">
+            <div class="col-sm-8">
+              <div class="clickable" ng-model="address.instructionsDisable" ng-click="address.instructionsDisable=!address.instructionsDisable">
+                <label for="deliveryInstructions" ng-show="address.instructionsDisable">Delivery Instructions:</label>
+                <div ng-show="!address.instructionsDisable && address.specialInstructions.length" name="deliveryInstructions">{{address.specialInstructions}}</div>
+                <span ng-show="!address.specialInstructions.length && !address.instructionsDisable">
+                  <abbr title="Click to edit">No delivery instructions given</abbr>
+                </span>
+              </div>
+
+              <textarea ng-show="address.instructionsDisable" name="deliveryInstructions" class="form-control clearfix" ng-model="user.addresses[$index].deliveryInstructions" rows="1">{{address.specialInstructions}}</textarea> 
+            </div>
+
+            <div class="col-sm-4">
+              <div class="default-address-radio-btn" ng-show="isAuthenticated">
+                <label for="defaultAddress"><span>Make Default Address
+                  <input type="radio" id="option{{address.id}}" name="defaultAddress" ng-model="user.defaultAddress" value="{{address.id}}"  /></span>
+                </label>
+              </div>
+            </div>
+          </div>
+         <div class="form-group" ng-show="isAuthenticated">
+          <div class="col-sm-12">
+            <button class="removeItemButton btn" ng-click="removeAddress(user.addresses, address, $index)" ng-show="!$first">
+              Remove address {{$index+1}}
+              <i class="glyphicon-minus"></i>
+            </button>
+            <span ng-show="$first">
+              <i>At least 1 address must exist for your account to appear on the map.</i>
+            </span>
+          </div>
+        </div>
+      </fieldset>
+    </ng-form>
+  </div><!-- ng-repeat -->
+ <div class="row form-group form-control-strip">
+    <span class="col-sm-4">
+      <button type="submit" ng-disabled="newUserForm.$invalid" ng-click="formSave(user, newUserForm)" class="btn btn-primary">
+        <span ng-show="!user.id">Save User</span>
+        <span ng-show="user.id">Update User</span>
+      </button>
+      <button type="button" ng-click="reset()" class="btn btn-default">Reset</button>
+    </span> 
+    <span class="col-sm-4">
+      <span ng-show="savedMessage" class="text-success glyphicon glyphicon-floppy-saved">Change saved!
+    </span>
+    <span class="col-sm-1 col-sm-push-4 pull-right">
+      <button class="addItemButton btn" ng-click="addAddress(user.addresses)" ng-show="isAuthenticated">
+        Add another address
+        <i class="glyphicon-plus"></i>
+      </button>
+    </span>
+  </div> 
+</form>

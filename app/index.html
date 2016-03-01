@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head>
+  <base href="/"/>
+  <title>CI Test</title>
+    <link rel="stylesheet" href="/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+  <header>
+  <nav class="navbar navbar-default navbar-fixed-top" ng-cloak>
+    <div class="container">
+      <div class="navbar-header"> 
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand visible-xs-inline-block" href="#">CI Test</a>
+      </div>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse" aria-expanded="false" style="height: 1px;">
+      <ul class="nav navbar-nav">
+        <li class="hidden-xs"><a href="/"><b>CI Test</b></a></li>
+        <li><a href="/map" ng-show="isAuthenticated">User Map</a></li>
+        <li class="dropdown" ng-show="isAdmin">
+          <a class="dropdown-toggle" id="menu1" data-toggle="dropdown" href="/users">
+            Users
+            <span class="caret"></span>
+          </a>
+          <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
+            <li><a href="/user">Create User Profile</a></li>
+          </ul>
+        </li>
+        <li><a href="/account/{{$root.authUser.id}}" ng-show="isAuthenticated">My Account</a></li>
+        <li><a href="/login" ng-show="!isAuthenticated">Login</a></li>
+        <li><a href="/register" ng-show="!isAuthenticated">Register</a></li>
+        <li><a href="/login/logout" ng-show="isAuthenticated">Logout</a></li>
+      </ul>
+    </div>
+  </nav>
+  </header>
+  <div class="container ng-view-container container-main">
+    <div ng-view></div>
+  </div>
+  <footer>
+    
+  </footer>
+  <script src="/lib/angular/angular.js"></script>
+  <script src="/lib/angular/angular-route.js"></script>
+  <script src="/lib/angular/angular-resource.js"></script>
+  <script src="/lib/angular/angular-messages.js"></script>
+  <script src="/lib/angular/angular-message-format.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <script src="/lib/bootstrap/bootstrap.min.js"></script>
+  <script async defer
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC_MqNXVF36cZgRywDiji4n7AZli25uFQs">
+  </script>
+  <script src="/js/app.js"></script>
+  <script src="/js/controllers/AuthController.js"></script> 
+  <script src="/js/controllers/UserController.js"></script> 
+ <!--  <script src="/js/controllers/UserEditController.js"></script> -->
+  <script src="/js/controllers/UserListController.js"></script>
+  <script src="/js/controllers/MapController.js"></script>
+  <script src="/js/services/AuthServices.js"></script>
+  <script src="/js/services/UserData.js"></script>
+  <script src="/js/services/resources/Provinces.js"></script>
+  <script src="/js/services/DisplayMessage.js"></script>
+  <script src="/js/services/GoogleMapsApi.js"></script>
+  <script src="/js/services/GoogleGeoLocation.js"></script>
+  <script src="/js/services/GoogleMapsGeocoding.js"></script>
+  <script src="/js/directives/ConfirmDelete.js"></script>
+  <script src="/js/directives/RecordAvailabilityValidator.js"></script>
+  <script src="/js/directives/DisplayMessage.js"></script>
+  <script src="/js/directives/GoogleMapsGeocoding.js"></script>
+  <script src="/js/filters/TelephoneNumber.js"></script> 
+</body>
+</html>

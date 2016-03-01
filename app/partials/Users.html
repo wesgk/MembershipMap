@@ -1,0 +1,21 @@
+<h2>Existing Users</h2>
+
+<table class="table table-striped">
+  <tr>
+    <th ng-repeat="(i,item) in tableHeadings" 
+        ng-class="selectedColumns(i)" ng-click="changeSorting(item.column)">
+        {{item.title}}
+    </th>
+  </tr>
+  <tr ng-repeat="user in users | orderBy : sort.column : sort.descending">
+    <td><a href="/user/{{user._id}}" class="btn glyphicon glyphicon-edit" title="Edit"></a></td>
+    <td>{{user.fname}}</td>
+    <td>{{user.lname}}</td>
+    <td>{{user.email}}</td>
+    <td>{{user.telephone}}</td>
+    <td>{{user.userType}}</td>
+    <td>{{user.addresses[user.defaultAddress].city}}</td>
+    <td><div confirm-delete on-confirm="deleteUser(user)"></div></td>
+  </tr>
+</table>
+

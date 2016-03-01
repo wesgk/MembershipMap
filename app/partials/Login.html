@@ -1,0 +1,14 @@
+<div class="fixed-top-content-margin">
+  <display-message message="{{$successMessage || 'Login Successful!'}}" alert-type="success" flash-message="false"></display-message>
+  <display-message message="{{$successMessage || 'Your Login Failed'}}" alert-type="error" flash-message="false"></display-message>
+
+  <p ng-show="isAuthenticated">{{welcome}}</p>
+  <p ng-show="isAuthenticated">{{redirect}}</p>
+  <form ng-show="!isAuthenticated" ng-submit="submit()">
+    <input ng-model="user.username" type="text" name="user" placeholder="Email" />
+    <input ng-model="user.password" type="password" name="pass" placeholder="Password" />
+    <input type="submit" value="Login" />
+  </form>
+  <p ng-show="!isAuthenticated">New user?  <a href="/register">Register</a>.</p>
+  <p>{{error}}</p>
+</div>
