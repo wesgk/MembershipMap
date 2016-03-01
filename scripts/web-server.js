@@ -63,7 +63,8 @@ app.get('/api/restricted', function (req, res) {
  */
 
 var mongoose = require('mongoose'); // mongoose
-mongoose.connect('mongodb://localhost:27017/myApp', function(err) {
+// mongoose.connect('mongodb://localhost:27017/myApp', function(err) {
+mongoose.connect('mongodb://heroku_tn6bm1xs:2ton3ngbj7uuf172kh1f4invj2@ds019708.mlab.com:19708/heroku_tn6bm1xs', function(err) {
   if(err) {
       console.log('connection error', err);
   } else {
