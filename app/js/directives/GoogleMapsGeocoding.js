@@ -23,8 +23,6 @@ myApp.directive('googleMapsGeocoding',
         infowindow = new google.maps.InfoWindow();
       }
       function plotAddresses (users){
-        // var users = users.slice(0,3);
-        console.dir(users);
         userCount = users.length;
         for(var i = 0; i < users.length; i++){
           var user = users[i];
@@ -40,7 +38,6 @@ myApp.directive('googleMapsGeocoding',
         }
       }
       function codeAddress (address, content) {
-        $log.log('address: ' + address);
         geocoder.geocode( { 'address': address}, function(results, status) {
           if (status == google.maps.GeocoderStatus.OK) {
             map.setCenter(results[0].geometry.location);

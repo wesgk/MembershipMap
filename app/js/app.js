@@ -2,10 +2,6 @@
 
 var myApp = angular.module('myApp', ['ngResource', 'ngRoute', 'ngMessages']);
 
-myApp.config(function($logProvider){
-  $logProvider.debugEnabled(false); // default = true
-});
-
 myApp.config(function ($httpProvider) {
   $httpProvider.interceptors.push('authInterceptor');
 });
@@ -134,7 +130,7 @@ myApp.config(function($routeProvider, $locationProvider, $logProvider){
     })
     .otherwise({redirectTo: "/login"});
     $locationProvider.html5Mode(true); // removes the hash from URL
-    $logProvider.debugEnabled(true);
+    $logProvider.debugEnabled(false);
 });
 
 $(document).on('click','.navbar-collapse.in',function(e) {
