@@ -130,7 +130,6 @@ myApp.factory('userData',
   };
 
   var getUser = function (userId, successcb) {
-    $log.debug('in getUser getting: '+ userId);
     $http({method:'GET', url: '/mongo/user/'+userId}).
       success(function(data, status, headers, config){
         successcb(data); 
@@ -141,7 +140,6 @@ myApp.factory('userData',
   };
 
   var deleteUser = function (userId, successcb) {
-    $log.debug('in deleteUser getting: '+ userId);
     $http({method:'DELETE', url: '/mongo/user/'+userId}).
       success(function(data, status, headers, config){
         successcb(data); 
