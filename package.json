@@ -1,8 +1,11 @@
 {
-  "name": "Login and Map App",
+  "name": "Membership Map",
   "version": "1.0.0",
+  "engines": {
+    "node": "4.1.1"
+  },
   "description": "Employment project",
-  "main": "index.js",
+  "main": "index.html",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
