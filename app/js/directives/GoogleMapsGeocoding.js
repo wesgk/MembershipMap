@@ -30,8 +30,8 @@ myApp.directive('googleMapsGeocoding',
           if(typeof users[i] === "object" && name === "Resource"){ // test for promise
             var defaultAddress, formattedAddress, formattedContent;
             defaultAddress = user.addresses[user.defaultAddress];
-            formattedAddress = googleMapsGeocoding.getFormattedAddress(defaultAddress);
-            formattedContent = googleMapsGeocoding.getFormattedContent(user);
+            formattedAddress = userData.getFormattedAddress(defaultAddress);
+            formattedContent = userData.getFormattedContent(user);
             codeAddress(formattedAddress, formattedContent);
             markerCounter(); // increment marker count, limits references in centerAndFit
           }

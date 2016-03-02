@@ -149,6 +149,34 @@ myApp.factory('userData',
       });
   };
 
+  var getFormattedAddress = function (rec){ // accepts custom defined object - not google response
+    var buildingNumber, streetName, city, province, postalCode, country;
+    buildingNumber = (rec.buildingNumber ? rec.buildingNumber + ' ' : '');
+    streetName = (rec.streetName ? rec.streetName + ' ' : '');
+    city = (rec.city ? rec.city + ' ' : '');
+    province = (rec.province ? rec.province + ' ' : '');
+    postalCode = (rec.postalCode ? rec.postalCode + ' ' : '');
+    country = (rec.country ? rec.country + ' ' : '');
+
+    return buildingNumber + streetName + city + province + postalCode + country;
+  };
+
+  var getFormattedContent = function (rec){ // accepts custom defined object - not google response
+    var fname, lname, telephone, address, buildingNumber, streetName, city, province, postalCode, country;
+    address = rec.addresses[rec.defaultAddress];
+    fname = (rec.fname ? rec.fname + ' ' : ''); 
+    lname = (rec.lname ? rec.lname + ' ' : '');
+    telephone = (rec.telephone ? $filter('tel')(rec.telephone) + ' ' : '');
+    buildingNumber = (address.buildingNumber ? address.buildingNumber + ' ' : '');
+    streetName = (address.streetName ? address.streetName + ' ' : '');
+    city = (address.city ? address.city + ' ' : '');
+    province = (address.province ? address.province + ' ' : '');
+    postalCode = (address.postalCode ? address.postalCode + ' ' : '');
+    country = (address.country ? address.country + ' ' : '');
+
+    return fname + lname + '<br>' + telephone + '<br>' + buildingNumber + streetName + '<br>' + city + province + '<br>' + country + postalCode ;
+  };
+
   return {
     user: user,
     getUser: getUser,
@@ -177,6 +205,8 @@ myApp.factory('userData',
     getAddresses: getAddresses,
     addAddress: addAddress,
     removeAddress: removeAddress,
-    getProvincePos: getProvincePos
+    getProvincePos: getProvincePos,
+    getFormattedAddress: getFormattedAddress,
+    getFormattedContent: getFormattedContent
   };  
 });

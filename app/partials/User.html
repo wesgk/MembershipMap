@@ -4,7 +4,7 @@
 
   <display-message message="{{$successMessage || opType + ' Successful!'}}" alert-type="success" flash-message="false"></display-message>
   <display-message message="{{$successMessage || 'Something Went Wrong During The ' + opType}}" alert-type="error" flash-message="false"></display-message>
-
+  
   <div class="form-group">
     <span ng-class="{'has-error':newUserForm.fname.$error.required}">
       <label for="fname">First Name:</label>
@@ -73,6 +73,9 @@
   </div>
  <div ng-repeat="address in user.addresses" ng-model="user.addresses" id="panel{{$index}}" >
     <div ng-init="address.formName='addressForm'+$index" ></div>
+    <div class="row">
+      <google-maps-draggable address="user.addresses[$index]" addressIndex="$index"></google-maps-draggable>
+    </div>
     <ng-form name="address.formName">  
       <fieldset>
         <h3>Address <span ng-show="user.addresses.length>1">{{$index+1}}</span></h3>
@@ -131,6 +134,18 @@
             <span ng-class="{'has-error': newUserForm.postalCode.$error.required}">
               <label for="postalCode">Postal Code:</label>
               <input type="text" name="postalCode" ng-model="user.addresses[$index].postalCode" ng-minlength="6" />
+            </span>
+          </div>
+          <div class="form-group">
+            <span ng-class="{'has-error': newUserForm.lat.$error.required}">
+              <label for="lat">Latitude:</label>
+              <input type="text" name="lat" ng-model="user.addresses[$index].lat" />
+            </span>
+          </div>
+          <div class="form-group">
+            <span ng-class="{'has-error': newUserForm.lng.$error.required}">
+              <label for="lng">Longitude:</label>
+              <input type="text" name="lng" ng-model="user.addresses[$index].lng" />
             </span>
           </div>
           <div class="form-group">

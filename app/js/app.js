@@ -115,7 +115,7 @@ myApp.config(function($routeProvider, $locationProvider, $logProvider){
       controller: "AuthController",
       resolve: {
         autoRedirect: function(){
-          return '/map';
+          // return '/map';
         }
       }
     })
@@ -124,13 +124,13 @@ myApp.config(function($routeProvider, $locationProvider, $logProvider){
       controller: "AuthController",
       resolve: {
         autoRedirect: function(){
-          return '/map';
+          // return '/map';
         }
       }
     })
     .otherwise({redirectTo: "/login"});
     $locationProvider.html5Mode(true); // removes the hash from URL
-    $logProvider.debugEnabled(false);
+    $logProvider.debugEnabled(true);
 });
 
 $(document).on('click','.navbar-collapse.in',function(e) {
