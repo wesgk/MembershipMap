@@ -23,7 +23,7 @@ This was an exercise in better organizing my MVC code in Angular.
 * [Google Maps Geocoding API](https://developers.google.com/maps/documentation/geocoding/intro)
 
 ## Bugs and Future Changes
-* User Map Screen - Google map retrieves Geocode from [Google Maps Geocoding API](https://developers.google.com/maps/documentation/geocoding/intro).  [Google Maps JavaScript API](https://developers.google.com/maps/documentation/javascript/controls) should be utilized.
+* There is a bug in saving addresses on the heroku server
 * Checkboxes on User Map screen should filter map markers: not yet working 
 
 ## Contributors
