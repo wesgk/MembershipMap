@@ -37,7 +37,6 @@ myApp.directive('googleMapsDraggable',
       }
 
       function geocodeAddress () {
-        console.log('begin geocode of address : ' + address);
         geocoder.geocode( { 'address': address}, function(results, status) {
           if (status == google.maps.GeocoderStatus.OK) {
             var latLng = googleMapsGeocoding.getLatLng(results);

@@ -21,7 +21,6 @@ myApp.controller("UserController",
 
   function getUser (id){
     userData.getUser(id, function (user){
-      console.dir(user);
       $scope.user = user;
       $scope.user.id = $scope.user._id; // handle mongoDB auto id
       setSelectedProvinces($scope.user.addresses); // set province dropdown to selected
@@ -34,7 +33,6 @@ myApp.controller("UserController",
 
   function saveUser (user, newUserForm){
     $log.debug('in saveNewUser');
-    console.dir(user);
     if(newUserForm.$valid){
       userData.save(user)
         .$promise
