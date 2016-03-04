@@ -1,6 +1,6 @@
 # Membership & Map App
 
-## 2016/02/29
+## 2016/03/03
 ## Synopsis
 
 A simple app including:
@@ -23,8 +23,7 @@ This was an exercise in better organizing my MVC code in Angular.
 * [Google Maps Geocoding API](https://developers.google.com/maps/documentation/geocoding/intro)
 
 ## Bugs and Future Changes
-* Lat/Lng values are not being saved to the DB
-* Google map retrieves Geocode from [Google Maps Geocoding API](https://developers.google.com/maps/documentation/geocoding/intro).  [Google Maps JavaScript API](https://developers.google.com/maps/documentation/javascript/controls) should be utilized.
+* User Map Screen - Google map retrieves Geocode from [Google Maps Geocoding API](https://developers.google.com/maps/documentation/geocoding/intro).  [Google Maps JavaScript API](https://developers.google.com/maps/documentation/javascript/controls) should be utilized.
 * Checkboxes on User Map screen should filter map markers: not yet working 
 
 ## Contributors
