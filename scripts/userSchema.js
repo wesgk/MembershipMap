@@ -16,10 +16,11 @@ var UserSchema = new mongoose.Schema({
     country: String,
     province: String,
     postalCode: String,
-    latLong: String,
+    lat: String,
+    lng: String,
     specialInstructions: String
   }],
-  defaultAddress: String,
+  defaultAddress: { type: Number, default: 0 },
   note: String,
   password: String,
   userType: { type: Number, default: 5 },

@@ -3,7 +3,7 @@ myApp.directive('googleMapsDraggable',
   'use strict'; 
   
   var defaultLat=49.2827, defaultLng=-123.1207, mapCenter, userDefinedCenter=false, mapZoom=10;
-    mapCenter = new google.maps.LatLng(defaultLat, defaultLng);
+  mapCenter = new google.maps.LatLng(defaultLat, defaultLng);
   
   return {
     restrict: 'E',

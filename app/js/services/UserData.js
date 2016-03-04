@@ -13,6 +13,8 @@ myApp.factory('userData',
     country: '',
     province: '',
     postalCode: '',
+    lat: '',
+    lng: '',
     specialInstructions: ''
   };
 
@@ -32,7 +34,8 @@ myApp.factory('userData',
       country: 'USA',
       province: '',
       postalCode: '',
-      latLong: '',
+      lat: '',
+      lng: '',
       specialInstructions: ''
     }
     ],
@@ -55,7 +58,8 @@ myApp.factory('userData',
       country: 'USA',
       province: '',
       postalCode: '',
-      latLong: '',
+      lat: '',
+      lng: '',
       specialInstructions: ''
     }
     ],
