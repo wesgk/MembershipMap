@@ -1,8 +1,7 @@
-'use strict';
-
 myApp.directive('confirmDelete', 
   function confirmDelete () {
-  
+  'use strict';
+
   return {
     replace: true,
     templateUrl: 'partials/Utilities/DeleteConfirmation.html',
@@ -12,13 +11,15 @@ myApp.directive('confirmDelete',
     controller: function ($scope) {
       $scope.isDeleting = false;
       $scope.startDelete = function () {
-        return $scope.isDeleting = true;
+        $scope.isDeleting = true;
+        return $scope.isDeleting;
       };
       $scope.cancel = function () {
-        return $scope.isDeleting = false;
+        $scope.isDeleting = false;
+        return $scope.isDeleting;
       };
-      return $scope.confirm = function () {
-        return $scope.onConfirm();
+      $scope.confirm = function () {
+        $scope.onConfirm();
       };
     }
   };

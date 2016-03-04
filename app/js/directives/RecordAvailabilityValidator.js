@@ -1,8 +1,7 @@
-'use strict';
-
 myApp.directive('recordAvailabilityValidator',
-    function recordAvailabilityValidator ($http) {
-
+  function recordAvailabilityValidator ($http) {
+  'use strict';
+    
   return {
     require : 'ngModel',
     link : function (scope, element, attrs, ngModel) {
@@ -17,7 +16,7 @@ myApp.directive('recordAvailabilityValidator',
       }
 
       ngModel.$parsers.push( function (value) {
-        if(!value || value.length == 0) return;
+        if(!value || value.length === 0) return;
         // append id to apiUrl if it exists
         // if passed the record from the existing user 
         // will excluded in the validation (this was setup for testing unique email address)

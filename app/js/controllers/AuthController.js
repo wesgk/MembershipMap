@@ -1,8 +1,7 @@
-'use strict';
-
 myApp.controller('AuthController', 
   function AuthController ($scope, authLogin, autoRedirect, displayMessageService, $routeParams, $rootScope, $filter, $http, $timeout, $log, $location, $window) {
-  
+  'use strict';
+
   $scope.user = {username: '', password: ''};
   $scope.message = '';
 
@@ -27,7 +26,7 @@ myApp.controller('AuthController',
         $location.path(autoRedirect);
       }, 2500);
     });
-  }
+  };
 
   $scope.callRestricted = function () {
     $http({url: '/api/restricted', method: 'GET'})

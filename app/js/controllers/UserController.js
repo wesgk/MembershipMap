@@ -1,7 +1,6 @@
-'use strict';
-
 myApp.controller("UserController", 
   function UserController ($scope, userData, authLevel, templateUserId, autoLogin, autoRedirect, opType, displayMessageService, provinces, authLogin, $rootScope, $routeParams, $location, $log, $timeout){
+  'use strict';
 
   if(!authLevel()){ // auth check
     $location.path('/login');
@@ -12,7 +11,8 @@ myApp.controller("UserController",
   $scope.selectedProvince = angular.copy($scope.provinces[0].abbreviation);
   $scope.user.defaultAddress = 0; // auto-set 1st address as default
   $scope.opType = opType;
-  // $scope.isAuthenticated
+  $scope.userTypes = userData.userTypes;
+
   var userId = templateUserId(); // retrieve userId
   
   if(userId){ // if id is set retrieve user data
@@ -21,6 +21,7 @@ myApp.controller("UserController",
 
   function getUser (id){
     userData.getUser(id, function (user){
+      console.dir(user);
       $scope.user = user;
       $scope.user.id = $scope.user._id; // handle mongoDB auto id
       setSelectedProvinces($scope.user.addresses); // set province dropdown to selected
@@ -29,19 +30,20 @@ myApp.controller("UserController",
   
   $scope.formSave = function (user, newUserForm){ // standard form save
     saveUser(user, newUserForm);
-  }
+  };
 
   function saveUser (user, newUserForm){
     $log.debug('in saveNewUser');
+    console.dir(user);
     if(newUserForm.$valid){
       userData.save(user)
         .$promise
         .then(function(response){ 
           $log.debug('success', response); 
+          getUser(user.id); // get saved fields 
           formAlert('success'); 
-          $scope.user = response; // set new user to current user
-          $scope.user.id = response._id; // copy MongoDB id to scope
-          
+          // $scope.user = response; // set new user to current user
+          // $scope.user.id = response._id; // copy MongoDB id to scope
           if(autoLogin){ // login user after profile is created (/register)
             $scope.user.username = $scope.user.email;
             $scope.user.password = $scope.user.password;
@@ -53,7 +55,7 @@ myApp.controller("UserController",
             });
           }
         })
-        .catch(function(response){ $log.error('failure', response)});
+        .catch(function(response){ $log.error('failure', response); });
     }
   }
 
@@ -80,6 +82,6 @@ myApp.controller("UserController",
 
   function formAlert (alertType){ // alertType: success || error
     displayMessageService.publish(alertType); 
-  };
+  }
 
 });

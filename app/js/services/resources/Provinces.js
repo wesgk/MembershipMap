@@ -1,6 +1,6 @@
-
 myApp.factory('provinces', function(){
-
+    'use strict';
+    
     var provinces = [
     {
         "name": "",

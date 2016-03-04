@@ -1,8 +1,7 @@
-'use strict';
-
 myApp.controller('MapController',
   function MapController ($scope, authLevel, userData, googleMapsGeocoding, $rootScope, $location, $log, $timeout){
-    
+  'use strict';
+
     if(!authLevel()){ // auth check
       $location.path('/login');
     }
@@ -48,8 +47,8 @@ myApp.controller('MapController',
         .then(function(response){ 
           $scope.users = response;
         })
-        .catch(function(response){ $log.error('failure', response)});
-    }
+        .catch(function(response){ $log.error('failure', response); });
+    };
 
     $scope.selectedCls = function (column) {
       return column == $scope.sort.column && 'sort-' + $scope.sort.descending;
@@ -64,7 +63,7 @@ myApp.controller('MapController',
           sort.column = column;
           sort.descending = false;
       }
-    }
+    };
 
     $scope.getAllItems();
 });

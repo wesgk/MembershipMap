@@ -1,7 +1,6 @@
-'use strict';
-
 myApp.filter('tel', function () {
-    
+    'use strict';
+        
     return function (tel) {
         if (!tel) { return ''; }
 

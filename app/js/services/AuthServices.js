@@ -1,8 +1,7 @@
-'use strict';
-
 myApp.factory('authLogin', 
   function authLogin ($q, $rootScope, $window, $http, $log) {
-  
+  'use strict';
+
   var logout = function ($scope, $rootScope){
     $scope.welcome = '';
     $scope.message = '';
@@ -35,19 +34,19 @@ myApp.factory('authLogin',
         $scope.id = '';
         $scope.error = 'Error: Invalid user or password';
       });
-  }
+  };
 
   var isAuthenticated = function () {
     return $rootScope.isAuthenticated;
-  }
+  };
 
   var isAdmin = function () {
     return $rootScope.isAdmin;
-  }
+  };
 
   var isPublic = function () {
     return true; // always true
-  }
+  };
 
   //this is used to parse the profile
   function url_base64_decode(str) {
@@ -79,6 +78,7 @@ myApp.factory('authLogin',
 
 // http interceptor
 myApp.factory('authInterceptor', function ($q, $window) {
+  'use strict';
   
   var request = function (config){
     config.headers = config.headers || {};
@@ -86,14 +86,14 @@ myApp.factory('authInterceptor', function ($q, $window) {
         config.headers.Authorization = 'Bearer ' + $window.sessionStorage.token;
       }
       return config;
-  }
+  };
 
   var responseError = function (rejection) {
     if (rejection.status === 401) {
       // handle the case where the user is not authenticated
     }
     return $q.reject(rejection);
-  }
+  };
 
   return {
     request: request,

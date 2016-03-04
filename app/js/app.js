@@ -1,12 +1,14 @@
-'use strict';
-
 var myApp = angular.module('myApp', ['ngResource', 'ngRoute', 'ngMessages']);
 
 myApp.config(function ($httpProvider) {
+  'use strict';
+
   $httpProvider.interceptors.push('authInterceptor');
 });
 
 myApp.config(function($routeProvider, $locationProvider, $logProvider){
+  'use strict';
+  
   $routeProvider
     .when("/user/:id", {
       templateUrl: "partials/User.html",
@@ -130,7 +132,7 @@ myApp.config(function($routeProvider, $locationProvider, $logProvider){
     })
     .otherwise({redirectTo: "/login"});
     $locationProvider.html5Mode(true); // removes the hash from URL
-    $logProvider.debugEnabled(true);
+    $logProvider.debugEnabled(false);
 });
 
 $(document).on('click','.navbar-collapse.in',function(e) {

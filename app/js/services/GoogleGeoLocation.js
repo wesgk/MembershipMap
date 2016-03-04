@@ -1,8 +1,7 @@
-'use strict';
-
 myApp.factory('googleGeoLocation', 
   function googleGeoLocation(){
-  
+  'use strict';
+
   var getUserLocation = function (settings, callback){
     // Try HTML5 geolocation.
     if (navigator.geolocation) { 
@@ -32,7 +31,7 @@ myApp.factory('googleGeoLocation',
                             'Error: The Geolocation service failed.' :
                             'Error: Your browser doesn\'t support geolocation.');
     }
-  }
+  };
 
   var geocodePosition = function (pos, callback) {
     geocoder = new google.maps.Geocoder();
@@ -48,7 +47,7 @@ myApp.factory('googleGeoLocation',
       }
       }
     );
-  }
+  };
 
   return {
     getUserLocation: getUserLocation

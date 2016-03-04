@@ -1,8 +1,7 @@
-'use strict';
-
 myApp.directive('displayMessage', 
   function displayMessage (displayMessageService, $log) {
-  
+  'use strict';
+
   return{
     restrict: 'E',
     template: '<div ng-show="showAlert" class="{{styles}}"><button type="button" class="close" ng-click="closeMe()">×</button>{{message}}</div>',
@@ -35,13 +34,13 @@ myApp.directive('displayMessage',
           break;
         }
         return styles;
-      }
+      };
 
       $scope.showAlert = false;
 
       $scope.closeMe = function(){
         $scope.showAlert = false;
-      }
+      };
       
       var callback = function (){
         var styles = setStyle($scope.alertType);
@@ -50,7 +49,7 @@ myApp.directive('displayMessage',
         if($scope.flashMessage === true){ // if flash-message is set to true
           $timeout($scope.closeMe, 5000);
         }
-      }
+      };
       displayMessageService.subscribe($scope.alertType, callback); 
     }
   };

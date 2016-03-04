@@ -1,0 +1,60 @@
+/*= Variables
+------------------*/
+/*= Elements
+------------------*/
+i {
+  color: #747474; }
+
+/*= Layout
+------------------*/
+.navbar-brand {
+  display: none; }
+
+.navbar-title {
+  display: block; }
+
+.container-main {
+  margin-top: 50px; }
+
+.full-width {
+  width: 100%; }
+
+.fixed-top-content-margin {
+  margin: 24px 0; }
+
+/*= Tables
+------------------*/
+th[ng-click]:hover {
+  cursor: pointer; }
+
+/*= Forms
+------------------*/
+.form-control-strip {
+  margin-top: 20px; }
+
+/*= Maps
+------------------*/
+.user-address-map {
+  height: 300px; }
+
+/*= Alerts
+------------------*/
+[ng-messages] {
+  color: #f00; }
+
+/*= Styles
+------------------*/
+.caption {
+  margin: 0.6em 0;
+  font-style: italic;
+  font-size: 0.95em; }
+
+/*= MQ
+------------------*/
+@media only screen and (max-width: 758px) {
+  .navbar-brand {
+    display: block; }
+  .navbar-title {
+    display: none !important; } }
+
+/*# sourceMappingURL=main.css.map */

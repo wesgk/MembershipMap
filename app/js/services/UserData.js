@@ -1,7 +1,6 @@
-'use strict';
-
 myApp.factory('userData', 
-  function userData ($resource, $q, $http, $log, $rootScope, $routeParams, provinces){
+  function userData ($resource, $q, $http, $filter, $log, $rootScope, $routeParams, provinces){
+  'use strict';
 
   var resource = $resource('/mongo/user/:id', {id:'@id'}, {"getAll": {method:"GET", isArray:true, params: {something: "foo"}}} );
   
@@ -63,6 +62,17 @@ myApp.factory('userData',
     defaultAddress: ''
   };
 
+  var userTypes = [
+    { 
+      "id": 1, 
+      "name": 'Admin' 
+    },
+    {
+      "id": 5, 
+      "name": 'User' 
+    }
+  ];
+
   // see bottom of the file for list of provinces/states
 
   var getProvincePos = function (abbr) {
@@ -83,7 +93,7 @@ myApp.factory('userData',
       }
     }
     return addresses; 
-  }
+  };
 
   // return 1 dimentional array of all non-address data
   var getUserInfo = function (userRecords) { 
@@ -96,7 +106,7 @@ myApp.factory('userData',
       }
     }
     return info; 
-  }
+  };
 
   var addAddress = function (addresses) {
     $log.debug('in addAddress service');
@@ -107,8 +117,8 @@ myApp.factory('userData',
     addresses.push(newAddress);
   };
 
-  var removeAddress = function (addresses, address, index) {
-    var index = address.id ? (address.id - 1) : index;
+  var removeAddress = function (addresses, address, item) {
+    var index = item.id ? (item.id - 1) : item;
     if(index >= 0){
       addresses.splice(index, 1); // remove item
       var id = 1;
@@ -179,6 +189,7 @@ myApp.factory('userData',
 
   return {
     user: user,
+    userTypes: userTypes,
     getUser: getUser,
     save: function (user) {
       return resource.save(user);

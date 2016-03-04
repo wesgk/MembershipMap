@@ -1,8 +1,7 @@
-'use strict';
-
 myApp.factory('displayMessageService', 
   function displayMessageService (){
-
+  'use strict';
+    
     var listeners = [];
     
     return {

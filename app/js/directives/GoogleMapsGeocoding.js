@@ -1,7 +1,6 @@
-'use strict';
-
 myApp.directive('googleMapsGeocoding', 
   function googleMapsGeocoding (googleMapsGeocoding, googleGeoLocation, userData, $log) {
+  'use strict'; 
   
   var map, geocoder, infowindow,  markers=[], markerCount=0, userCount=0, allMarkersInitiated; // keep
 
@@ -18,7 +17,7 @@ myApp.directive('googleMapsGeocoding',
           zoom: 14,
           center: locationInfo,
           mapTypeId: 'terrain'
-        }
+        };
         map = new google.maps.Map(document.getElementById("googleMapsGeocoding"), mapOptions);
         infowindow = new google.maps.InfoWindow();
       }
@@ -64,7 +63,7 @@ myApp.directive('googleMapsGeocoding',
             plotAddresses(response);
           }
         })
-        .catch(function(response) { $log.error('failure', response)});
+        .catch(function(response) { $log.error('failure', response); });
       }
       function markerCounter(){
         markerCount++; // count markers 

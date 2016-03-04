@@ -1,7 +1,6 @@
-'use strict';
-
 myApp.controller("UserListController", 
   function UserListController ($scope, userData, authLevel, $rootScope, $location, $log){
+  'use strict';
 
   if(!authLevel()){ // auth check
     $location.path('/login');
@@ -49,7 +48,7 @@ myApp.controller("UserListController",
       $log.debug('success', response); 
       $scope.users = response; 
     })
-    .catch(function (response) { $log.error('failure', response)});
+    .catch(function (response) { $log.error('failure', response); });
   };
 
   $scope.deleteUser = function (user){
@@ -77,7 +76,7 @@ myApp.controller("UserListController",
         sort.column = column;
         sort.descending = false;
     }
-  }
+  };
 
   getAllUsers();
   

@@ -1,7 +1,6 @@
-'use strict';
-
 myApp.factory("googleMapsGeocoding", 
   function googleMapsGeocoding (googleMapsApiConfig, $filter, $http){
+  'use strict';
     
   var googlePlacesKey, defaultLat, defaultLng, defaultRadius;
   defaultLat = 49.2827;
@@ -30,9 +29,6 @@ myApp.factory("googleMapsGeocoding",
     getStreetName: function (rec){ 
       return getAddressComponent(rec, 'route', 'short');
     },
-    /*getNeighbourhood: function (rec){ 
-      
-    },*/
     getCity: function (rec){ 
       return getAddressComponent(rec, 'locality', 'short');
     },
