@@ -1,5 +1,5 @@
 myApp.controller('MapController',
-  function MapController ($scope, authLevel, userData, googleMapsGeocoding, $rootScope, $location, $log, $timeout){
+  function MapController ($scope, authLevel, userData, googleMapsGeocodingService, $rootScope, $location, $log, $timeout){
   'use strict';
 
     if(!authLevel()){ // auth check

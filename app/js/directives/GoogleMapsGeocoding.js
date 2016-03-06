@@ -1,5 +1,5 @@
 myApp.directive('googleMapsGeocoding', 
-  function googleMapsGeocoding (googleMapsGeocoding, googleGeoLocation, userData, $log) {
+  function googleMapsGeocoding (googleMapsGeocodingService, googleGeoLocation, userData, $log) {
   'use strict'; 
   
   var defaultLat=49.2827, defaultLng=-123.1207, mapCenter, userDefinedCenter=false, mapZoom=10;
@@ -7,11 +7,11 @@ myApp.directive('googleMapsGeocoding',
 
   return {
     restrict: 'E',
-    replace: true,
-    template: '<div id="googleMapsGeocoding" style="height:200px;width:100%;border:1px solid black;" class="user-address-map order-location map-marker-popups full-width"></div>',
+    replace: false,
+    template: '<div id="googleMapsGeocoding" class="user-address-map order-location map-marker-popups full-width"></div>',
     controller: function ($scope){
       
-      var map, infowindow,  markers=[], markerCount=0, userCount=0, allMarkersInitiated=false; // keep
+     var map, infowindow,  markers=[], markerCount=0, userCount=0, allMarkersInitiated=false; // keep
       // var geocoder; // uncomment when using reverseGeocodeAddress() 
 
       function initialize () {
@@ -71,23 +71,24 @@ myApp.directive('googleMapsGeocoding',
           }
         });
       }
-      function geocodeAddress (address, content) { // address = object
+      function geocodeAddress (latLng, content) { // latLng = { lat: [num], lng: [num] }
         var marker = new google.maps.Marker({
             map: map,
-            position: address
+            position: latLng
         });
         marker.addListener('click', function(){
           infowindow.setContent(content);
           infowindow.open(map, marker);
         });
         markers.push(marker);
-        centerAndFit(); // center map position
+        // centerAndFit(); // center map position
       }
       
       function markerCounter(){
         markerCount++; // count markers 
         if(markerCount === userCount){ // force syncronization
-          allMarkersInitiated = true; 
+          allMarkersInitiated = true;
+          centerAndFit(); 
         }
       }
       function centerAndFit(){

@@ -1,5 +1,5 @@
 myApp.directive('googleMapsDraggable', 
-  function googleMapsDraggable ($log, googleMapsGeocoding){
+  function googleMapsDraggable ($log, googleMapsGeocodingService){
   'use strict'; 
   
   var defaultLat=49.2827, defaultLng=-123.1207, mapCenter, userDefinedCenter=false, mapZoom=10;
@@ -25,7 +25,6 @@ myApp.directive('googleMapsDraggable',
         };
         map = new google.maps.Map(document.getElementById("map{{myAddress.id}}"), mapOptions);
       }
-
       function getFormAddress (){ // get form fields and append in order required by google
         var fields = ['apartmentNumber','buildingNumber', 'streetName', 'city', 'province', 'postalCode'];
         address = '';
@@ -35,11 +34,18 @@ myApp.directive('googleMapsDraggable',
         }
         contentString = address;
       }
-
-      function geocodeAddress () {
+      function formContainsLatLng(){
+        var lat=$scope.myAddress.lat, lng=$scope.myAddress.lng;
+        if(lat && lng){
+          return { lat: Number(lat) , lng: Number(lng) };
+        }else{
+          return false;
+        }
+      }
+      function reverseGeocodeAddress () {
         geocoder.geocode( { 'address': address}, function(results, status) {
           if (status == google.maps.GeocoderStatus.OK) {
-            var latLng = googleMapsGeocoding.getLatLng(results);
+            var latLng = googleMapsGeocodingService.getLatLng(results);
             populateFormFields(results);
             $scope.myLat = latLng.lat; // delete?
             $scope.myLng = latLng.lng; // delete?
@@ -79,6 +85,18 @@ myApp.directive('googleMapsDraggable',
           }
         });
       }
+      function geocodeAddress (latLng, content) { // latLng = { lat: [num], lng: [num] }
+        var marker = new google.maps.Marker({
+            map: map,
+            position: latLng
+        });
+        marker.addListener('click', function(){
+          infowindow.setContent(content);
+          infowindow.open(map, marker);
+        });
+        // markers.push(marker);
+        // centerAndFit(); // center map position
+      }
       function geocodePosition (pos, callback) {
         geocoder = new google.maps.Geocoder();
         geocoder.geocode({
@@ -97,20 +115,28 @@ myApp.directive('googleMapsDraggable',
       function populateFormFields (results) {
         $scope.$apply(function(){
           // SET NEW ADDRESS VALUES TO FORM
-          $scope.myAddress.buildingNumber = googleMapsGeocoding.getBuildingNumber(results);
-          $scope.myAddress.streetName = googleMapsGeocoding.getStreetName(results);
-          $scope.myAddress.city = googleMapsGeocoding.getCity(results);
-          $scope.myAddress.province = googleMapsGeocoding.getProvince(results);
-          $scope.myAddress.country = googleMapsGeocoding.getCountry(results);
-          $scope.myAddress.postalCode = googleMapsGeocoding.getPostalCode(results);
-          var latLng = googleMapsGeocoding.getLatLng(results);
+          $scope.myAddress.buildingNumber = googleMapsGeocodingService.getBuildingNumber(results);
+          $scope.myAddress.streetName = googleMapsGeocodingService.getStreetName(results);
+          $scope.myAddress.city = googleMapsGeocodingService.getCity(results);
+          $scope.myAddress.province = googleMapsGeocodingService.getProvince(results);
+          $scope.myAddress.country = googleMapsGeocodingService.getCountry(results);
+          $scope.myAddress.postalCode = googleMapsGeocodingService.getPostalCode(results);
+          var latLng = googleMapsGeocodingService.getLatLng(results);
           $scope.myAddress.lat = latLng.lat; // LATLNG are not returned in this result set
           $scope.myAddress.lng = latLng.lng; // so this API call is required to populate form
         });
       }
       initialize();
       getFormAddress();
-      geocodeAddress();
+      var thisLatLng = formContainsLatLng();
+      if(thisLatLng){
+        $log.log('has LatLng');
+        geocodeAddress(thisLatLng, contentString); // contentString is declared as link/top-parent var
+      }else{
+        $log.log('has not LatLng');
+        reverseGeocodeAddress();
+      }
+      
     }
   };
 });

@@ -64,6 +64,9 @@ myApp.config(function($routeProvider, $locationProvider, $logProvider, $httpProv
         },
         authLevel: function(authLogin){
           return authLogin.isAuthenticated;
+        },
+        googleMapResolver: function($q){ 
+          return googleMaps.resolver.map[1]($q);
         }
       }
     })
@@ -104,7 +107,7 @@ myApp.config(function($routeProvider, $locationProvider, $logProvider, $httpProv
         authLevel: function(authLogin){
           return authLogin.isAuthenticated;
         },
-        googleMapResolver: function($q){
+        googleMapResolver: function($q){ 
           return googleMaps.resolver.map[1]($q);
         }
       }

@@ -1,6 +1,6 @@
 <h2>{{opType}}</h2>
 
-<form name="newUserForm">
+<form name="newUserForm" classx="form-inline">
 
   <display-message message="{{$successMessage || opType + ' Successful!'}}" alert-type="success" flash-message="false"></display-message>
   <display-message message="{{$successMessage || 'Something Went Wrong During The ' + opType}}" alert-type="error" flash-message="false"></display-message>
@@ -8,7 +8,7 @@
   <div class="form-group">
     <span ng-class="{'has-error':newUserForm.fname.$error.required}">
       <label for="fname">First Name:</label>
-      <input type="text" name="fname" ng-model="user.fname" ng-minlength="2" required/>
+      <input type="text" name="fname" ng-model="user.fname" ng-minlength="2" class="form-control" required/>
       <div ng-messages="newUserForm.fname.$error">
         <div ng-messages-include="/partials/Utilities/ErrorMessages.html"></div>
       </div>
@@ -17,7 +17,7 @@
   <div class="form-group">
     <span ng-class="{'has-error':newUserForm.lname.$error.required}">
       <label for="lname">Last Name:</label>
-      <input type="text" name="lname" ng-model="user.lname" ng-minlength="2" required/>
+      <input type="text" name="lname" ng-model="user.lname" ng-minlength="2" class="form-control" required/>
       <div ng-messages="newUserForm.lname.$error">
         <div ng-messages-include="/partials/Utilities/ErrorMessages.html"></div>
       </div>
@@ -32,6 +32,7 @@
               ng-minlength="5" 
               ng-maxlength="30"
               record-availability-validator="/mongo/user/availability/email"
+              class="form-control" 
               required/>
       <div ng-messages="newUserForm.email.$error">
         <div ng-messages-include="/partials/Utilities/ErrorMessages.html"></div>
@@ -43,7 +44,7 @@
   <div class="form-group">
     <span ng-class="{'has-error':newUserForm.telephone.$error.required}">
       <label for="telephone">Telephone:</label>
-      <input type="text" name="telephone" ng-model="user.telephone" required ng-minlength="10">
+      <input type="text" name="telephone" ng-model="user.telephone" class="form-control" ng-minlength="10" class="form-control" required>
       <div ng-messages="newUserForm.telephone.$error">
         <div ng-messages-include="/partials/Utilities/ErrorMessages.html"></div>
       </div>
@@ -52,7 +53,7 @@
   <div class="form-group">
     <span ng-class="{'has-error':newUserForm.password.$error.required}">
       <label for="password">Password:</label>
-      <input type="password" name="password" ng-model="user.password" required ng-minlength="4">
+      <input type="password" name="password" ng-model="user.password" ng-minlength="4" class="form-control" required>
       <div ng-messages="newUserForm.password.$error">
         <div ng-messages-include="/partials/Utilities/ErrorMessages.html"></div>
       </div>
@@ -64,7 +65,7 @@
         <select name="userType" id="userType"
         ng-options="userType.id as userType.name for userType in userTypes"
         ng-model="user.userType"
-        ></select>
+        class="form-control"></select>
       <div ng-messages="newUserForm.userType.$error">
         <div ng-messages-include="/partials/Utilities/ErrorMessages.html"></div>
       </div>
@@ -84,13 +85,13 @@
           <div class="form-group">
             <span ng-class="">
               <label for="apartmentNumber">Apartment Number:</label>
-              <input type="text" name="apartmentNumber" ng-model="user.addresses[$index].apartmentNumber" />
+              <input type="text" name="apartmentNumber" ng-model="user.addresses[$index].apartmentNumber" class="form-control" />
             </span>
           </div>
           <div class="form-group">
             <span ng-class="{'has-error':addressForm_{{$index}}.buildingNumber.$error.required}">
               <label for="buildingNumber">Building Number:</label>
-              <input type="text" name="buildingNumber" ng-model="user.addresses[$index].buildingNumber" ng-minlength="1" required/>
+              <input type="text" name="buildingNumber" ng-model="user.addresses[$index].buildingNumber" ng-minlength="1" class="form-control" required/>
               <div ng-messages="address.formName['buildingNumber'].$error">
                 <div ng-messages-include="/partials/Utilities/ErrorMessages.html"></div>
               </div>
@@ -99,7 +100,7 @@
           <div class="form-group">
             <span ng-class="{'has-error':addressForm_{{$index}}.streetName.$error.required}">
               <label for="streetName">Street Name:</label>
-              <input type="text" name="streetName" ng-model="user.addresses[$index].streetName" ng-minlength="5" required/>
+              <input type="text" name="streetName" ng-model="user.addresses[$index].streetName" ng-minlength="5" class="form-control" required/>
               <div ng-messages="address.formName['streetName'].$error">
                 <div ng-messages-include="/partials/Utilities/ErrorMessages.html"></div>
               </div>
@@ -108,7 +109,7 @@
           <div class="form-group">
             <span ng-class="{'has-error':addressForm_{{$index}}.city.$error.required}">
               <label for="city">City:</label>
-              <input type="text" name="city" ng-model="user.addresses[$index].city" ng-minlength="3" required/>
+              <input type="text" name="city" ng-model="user.addresses[$index].city" ng-minlength="3" class="form-control" required/>
               <div ng-messages="address.formName['city'].$error">
                 <div ng-messages-include="/partials/Utilities/ErrorMessages.html"></div>
               </div>
@@ -117,7 +118,7 @@
           <div class="form-group">
             <span ng-class="{'has-error':addressForm_{{$index}}.province.$error.required}">
               <label for="province">Province:</label>
-              <select name="province" ng-model="user.addresses[$index].province" ng-options="province.abbreviation as province.name for province in provinces" required></select>
+              <select name="province" ng-model="user.addresses[$index].province" ng-options="province.abbreviation as province.name for province in provinces" class="form-control" required></select>
               <div ng-messages="address.formName['province'].$error">
                 <div ng-messages-include="/partials/Utilities/ErrorMessages.html"></div>
               </div>
@@ -126,7 +127,7 @@
           <div class="form-group">
             <span ng-class="{'has-error':addressForm_{{$index}}.country.$error.required}">
               <label for="country">Country:</label>
-              <input type="text" name="country" ng-model="user.addresses[$index].country" ng-minlength="3" required/>
+              <input type="text" name="country" ng-model="user.addresses[$index].country" ng-minlength="3" class="form-control" required/>
               <div ng-messages="address.formName['country'].$error">
                 <div ng-messages-include="/partials/Utilities/ErrorMessages.html"></div>
               </div>
@@ -135,20 +136,20 @@
           <div class="form-group">
             <span ng-class="{'has-error': newUserForm.postalCode.$error.required}">
               <label for="postalCode">Postal Code:</label>
-              <input type="text" name="postalCode" ng-model="user.addresses[$index].postalCode" ng-minlength="6" />
+              <input type="text" name="postalCode" ng-model="user.addresses[$index].postalCode" ng-minlength="6" class="form-control" />
               <span class="caption text-muted" ng-class="{'text-danger':address.formName.$dirty}">When typing in a new address, empty this field before saving</span>
             </span>
           </div>
           <div class="form-group">
             <span ng-class="{'has-error': newUserForm.lat.$error.required}">
               <label for="lat">Latitude:</label>
-              <input type="text" name="lat" ng-model="user.addresses[$index].lat" />
+              <input type="text" name="lat" ng-model="user.addresses[$index].lat" class="form-control" />
             </span>
           </div>
           <div class="form-group">
             <span ng-class="{'has-error': newUserForm.lng.$error.required}">
               <label for="lng">Longitude:</label>
-              <input type="text" name="lng" ng-model="user.addresses[$index].lng" />
+              <input type="text" name="lng" ng-model="user.addresses[$index].lng" class="form-control" />
             </span>
           </div>
           <div class="form-group">
