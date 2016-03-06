@@ -8,7 +8,7 @@ myApp.directive('googleMapsGeocoding',
   return {
     restrict: 'E',
     replace: true,
-    template: '<div id="googleMapsGeocoding" class="user-address-map order-location map-marker-popups full-width"></div>',
+    template: '<div id="googleMapsGeocoding" style="height:200px;width:100%;border:1px solid black;" class="user-address-map order-location map-marker-popups full-width"></div>',
     controller: function ($scope){
       
       var map, infowindow,  markers=[], markerCount=0, userCount=0, allMarkersInitiated=false; // keep
@@ -24,11 +24,6 @@ myApp.directive('googleMapsGeocoding',
         };
         map = new google.maps.Map(document.getElementById("googleMapsGeocoding"), mapOptions);
         infowindow = new google.maps.InfoWindow(); // global info window
-
-       /* uiGmapGoogleMapApi.then(function(maps) {
-          $scope.map     = { center: mapCenter, zoom: mapZoom };
-          $scope.options = { scrollwheel: true };
-        });*/
 
       }
       function getAllUsers (){ 
