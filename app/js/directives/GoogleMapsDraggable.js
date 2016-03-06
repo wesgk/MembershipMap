@@ -16,7 +16,8 @@ myApp.directive('googleMapsDraggable',
     template: '<div id="map{{myAddress.id}}" class="user-address-map map-marker-popups {{myAddress.streetName}}"></div>',
     link: function ($scope){
       var geocoder, map, address, contentString;
-      
+      // var map, infowindow,  markers=[], markerCount=0, userCount=0, allMarkersInitiated=false; // keep
+
       function initialize () {
         geocoder = new google.maps.Geocoder();
         var mapOptions = {
@@ -95,7 +96,7 @@ myApp.directive('googleMapsDraggable',
           infowindow.open(map, marker);
         });
         // markers.push(marker);
-        // centerAndFit(); // center map position
+        map.setCenter(latLng); // center map position
       }
       function geocodePosition (pos, callback) {
         geocoder = new google.maps.Geocoder();
@@ -130,10 +131,10 @@ myApp.directive('googleMapsDraggable',
       getFormAddress();
       var thisLatLng = formContainsLatLng();
       if(thisLatLng){
-        $log.log('has LatLng');
+        // $log.log('has LatLng');
         geocodeAddress(thisLatLng, contentString); // contentString is declared as link/top-parent var
       }else{
-        $log.log('has not LatLng');
+        // $log.log('has not LatLng');
         reverseGeocodeAddress();
       }
       
