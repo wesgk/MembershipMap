@@ -43,7 +43,7 @@ myApp.directive('googleMapsGeocoding',
           var name = user.constructor.name;
           if(typeof users[i] === "object" && name === "Resource"){ // test for promise
             var defaultAddress, formattedAddress, formattedContent;
-            defaultAddress = user.addresses[user.defaultAddress];
+            defaultAddress = (user.defaultAddress ? user.addresses[user.defaultAddress] : user.addresses[0]);
             formattedAddress = userData.getFormattedAddress(defaultAddress);
             formattedContent = userData.getFormattedContent(user);
             // reverseGeocodeAddress(formattedAddress, formattedContent);
