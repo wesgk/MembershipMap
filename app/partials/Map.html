@@ -5,7 +5,7 @@
 <table class="table table-striped">
   <tr>
     <th ng-repeat="(i,item) in tableHeadings" 
-        ng-class="selectedColumns(i)" ng-click="changeSorting(item.column)">
+        ng-class="selectedColumns(i)" ng-click="changeSorting(item.column)" class="{{item.classes}}">
         {{item.title}}
     </th>
   </tr>
@@ -13,9 +13,9 @@
     <td><input type="checkbox" checked="true"></td>
     <td>{{user.fname}}</td>
     <td>{{user.lname}}</td>
-    <td>{{user.addresses[user.defaultAddress].buildingNumber}}</td>
+    <td class="hidden-xs">{{user.addresses[user.defaultAddress].buildingNumber}}</td>
     <td>{{user.addresses[user.defaultAddress].streetName}}</td>
-    <td>{{user.addresses[user.defaultAddress].city}}</td>
+    <td class="hidden-xs">{{user.addresses[user.defaultAddress].city}}</td>
     <td><a href="/user/{{user._id}}" class="btn glyphicon glyphicon-edit" title="Edit"  ng-show="isAdmin"></a></td>
   </tr>
 </table>

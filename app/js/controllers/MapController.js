@@ -14,31 +14,38 @@ myApp.controller('MapController',
     $scope.tableHeadings = [
     {
       column: '',
-      title: ''
+      title: '',
+      classes: ''
     },
     {
       column: 'fname',
-      title: 'First Name'
+      title: 'First Name',
+      classes: ''
     },
     {
       column: 'lname',
-      title: 'Last Name'
+      title: 'Last Name',
+      classes: ''
     },
     {
       column: 'buildingNumber',
-      title: 'Building #'
+      title: 'Building #',
+      classes: 'hidden-xs'
     },
     {
       column: 'streetName',
-      title: 'Street'
+      title: 'Street',
+      classes: ''
     },
     {
       column: 'city',
-      title: 'City'
+      title: 'City',
+      classes: 'hidden-xs'
     },
     {
       column: '',
-      title: ''
+      title: '',
+      classes: ''
     }];
 
     $scope.getAllItems = function (){

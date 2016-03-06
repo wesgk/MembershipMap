@@ -1,12 +1,6 @@
-var myApp = angular.module('myApp', ['ngResource', 'ngRoute', 'ngMessages']);
+var myApp = angular.module('myApp', ['ngResource', 'ngRoute', 'ngMessages', 'ui.router']);
 
-myApp.config(function ($httpProvider) {
-  'use strict';
-
-  $httpProvider.interceptors.push('authInterceptor');
-});
-
-myApp.config(function($routeProvider, $locationProvider, $logProvider){
+myApp.config(function($routeProvider, $locationProvider, $logProvider, $httpProvider, $stateProvider){
   'use strict';
   
   $routeProvider
@@ -103,12 +97,15 @@ myApp.config(function($routeProvider, $locationProvider, $logProvider){
         }
       }
     })
-     .when("/map", {
+    .when("/map", {
       templateUrl: "partials/Map.html",
       controller: "MapController",
       resolve: {
         authLevel: function(authLogin){
           return authLogin.isAuthenticated;
+        },
+        googleMapResolver: function($q){
+          return googleMaps.resolver.map[1]($q);
         }
       }
     })
@@ -133,6 +130,7 @@ myApp.config(function($routeProvider, $locationProvider, $logProvider){
     .otherwise({redirectTo: "/login"});
     $locationProvider.html5Mode(true); // removes the hash from URL
     $logProvider.debugEnabled(false);
+    $httpProvider.interceptors.push('authInterceptor');
 });
 
 $(document).on('click','.navbar-collapse.in',function(e) {

@@ -24,6 +24,12 @@ myApp.directive('googleMapsGeocoding',
         };
         map = new google.maps.Map(document.getElementById("googleMapsGeocoding"), mapOptions);
         infowindow = new google.maps.InfoWindow(); // global info window
+
+       /* uiGmapGoogleMapApi.then(function(maps) {
+          $scope.map     = { center: mapCenter, zoom: mapZoom };
+          $scope.options = { scrollwheel: true };
+        });*/
+
       }
       function getAllUsers (){ 
         userData.getAllUsers().

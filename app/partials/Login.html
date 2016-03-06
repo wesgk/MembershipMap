@@ -4,7 +4,7 @@
 
   <p ng-show="isAuthenticated">{{welcome}}</p>
   <p ng-show="isAuthenticated">{{redirect}}</p>
-  <form ng-show="!isAuthenticated" ng-submit="submit()">
+  <form ng-show="!isAuthenticated" ng-submit="submit()" class="form-inline">
     <input ng-model="user.username" type="text" name="user" class="form-control" placeholder="Email" />
     <input ng-model="user.password" type="password" name="pass" class="form-control" placeholder="Password" />
     <input type="submit" class="form-control" value="Login" />

@@ -23,8 +23,8 @@ This was an exercise in better organizing my MVC code in Angular.
 * [Google Maps Geocoding API](https://developers.google.com/maps/documentation/geocoding/intro)
 
 ## Bugs and Future Changes
-* There is a bug in saving addresses on the heroku server
-* Checkboxes on User Map screen should filter map markers: not yet working 
+* The loading of Google Maps API isn't being handled correctly and therefore the maps don't always display.  If you experience this on heroku refresh the brower once or twice.  This fix underway.
+* Checkboxes on User Map screen should filter map markers: not yet working.
 
 ## Contributors
 @wesgknight
