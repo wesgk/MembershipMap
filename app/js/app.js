@@ -1,4 +1,4 @@
-var myApp = angular.module('myApp', ['ngResource', 'ngRoute', 'ngMessages', 'ui.router']);
+var myApp = angular.module('myApp', ['ngResource', 'ngRoute', 'ngMessages']);
 
 myApp.config(function($routeProvider, $locationProvider, $logProvider, $httpProvider, $stateProvider){
   'use strict';
