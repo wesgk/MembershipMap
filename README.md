@@ -24,6 +24,7 @@ This was an exercise in better organizing my MVC code in Angular & loading Googl
 ## Bugs and Future Changes
 * On the account/user-edit page the Google Map (directive) is loading before &amp; after the scope is populated, this is forcing an error prompt even though the map and marker successfully plot.
 * Checkboxes on User Map screen should filter map markers: not yet working.
+* ngMessagesInclude crashes on initial screen load, prior to $scope content loading.  [Angular Bug Entry](https://github.com/angular/angular/issues/816)
 
 ## Contributors
 @wesgknight

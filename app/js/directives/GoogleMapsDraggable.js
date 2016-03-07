@@ -26,7 +26,7 @@ myApp.directive('googleMapsDraggable',
         };
         map = new google.maps.Map(document.getElementById("map{{myAddress.id}}"), mapOptions);
       }
-      function getFormAddress (){ // get form fields and append in order required by google
+      function getAddress (){ // get form fields and append in order required by google
         var fields = ['apartmentNumber','buildingNumber', 'streetName', 'city', 'province', 'postalCode'];
         address = '';
         for(var i = 0; i < fields.length; i++){
@@ -34,8 +34,9 @@ myApp.directive('googleMapsDraggable',
           address += (field) ? (field + ' ') : '';
         }
         contentString = address;
+        return address || false;
       }
-      function formContainsLatLng(){
+      function getLatLng(){
         var lat=$scope.myAddress.lat, lng=$scope.myAddress.lng;
         if(lat && lng){
           return { lat: Number(lat) , lng: Number(lng) };
@@ -82,7 +83,7 @@ myApp.directive('googleMapsDraggable',
               });
             });
           } else {
-            alert("Geocode was not successful for the following reason: " + status);
+            alert("Geocode was not successful for the following reason: " + status + " address: " + address);
           }
         });
       }
@@ -128,14 +129,12 @@ myApp.directive('googleMapsDraggable',
         });
       }
       initialize();
-      getFormAddress();
-      var thisLatLng = formContainsLatLng();
-      if(thisLatLng){
-        // $log.log('has LatLng');
+      address = getAddress(); // get formatted address
+      var thisLatLng = getLatLng(); // get LatLng
+      if(thisLatLng){ // wait for 
         geocodeAddress(thisLatLng, contentString); // contentString is declared as link/top-parent var
-      }else{
-        // $log.log('has not LatLng');
-        reverseGeocodeAddress();
+      }else if(address){
+        reverseGeocodeAddress(address);
       }
       
     }
