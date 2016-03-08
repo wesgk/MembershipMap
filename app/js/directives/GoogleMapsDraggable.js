@@ -10,6 +10,8 @@ myApp.directive('googleMapsDraggable',
     replace: true,
     scope: {
       myAddress: '=address',
+      staticAddress: '=staticaddress',
+      myForm: '=form',
       myLat: '=lat',
       myLng: '=lng',
     },
@@ -87,9 +89,11 @@ myApp.directive('googleMapsDraggable',
           }
         });
       }
+
       function geocodeAddress (latLng, content) { // latLng = { lat: [num], lng: [num] }
         var marker = new google.maps.Marker({
             map: map,
+            draggable: false, 
             position: latLng
         });
         marker.addListener('click', function(){
@@ -99,7 +103,7 @@ myApp.directive('googleMapsDraggable',
         // markers.push(marker);
         map.setCenter(latLng); // center map position
       }
-      function geocodePosition (pos, callback) {
+      function geocodePosition (pos, callback) { // called proceeding marker drop
         geocoder = new google.maps.Geocoder();
         geocoder.geocode({
             latLng: pos
@@ -128,13 +132,20 @@ myApp.directive('googleMapsDraggable',
           $scope.myAddress.lng = latLng.lng; // so this API call is required to populate form
         });
       }
+      function setLatLngState(state){
+        $scope.myForm.$dirty = ( state === 'dirty' ? true : false);
+        $scope.myForm.latlngModified = ( state === 'dirty' ? true : false); // this class is monitored for form highlighting
+        var test = state;
+      }
       initialize();
       address = getAddress(); // get formatted address
       var thisLatLng = getLatLng(); // get LatLng
       if(thisLatLng){ // wait for 
         geocodeAddress(thisLatLng, contentString); // contentString is declared as link/top-parent var
+        setLatLngState('pristine');
       }else if(address){
         reverseGeocodeAddress(address);
+        setLatLngState('dirty');
       }
       
     }

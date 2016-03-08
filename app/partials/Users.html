@@ -7,8 +7,12 @@
         {{item.title}}
     </th>
   </tr>
-  <tr ng-repeat="user in users | orderBy : sort.column : sort.descending">
-    <td><a href="/user/{{user._id}}" class="btn glyphicon glyphicon-edit" title="Edit"></a></td>
+  <tr ng-repeat="user in users | orderBy : sort.column : sort.descending" ng-class="{'has-issue danger':{{(user.addresses[user.defaultAddress].lat.length == 0 || user.addresses[user.defaultAddress].lng.length == 0)}}}">
+    <td>
+      <a href="/user/{{user._id}}" class="btn btn-edit glyphicon glyphicon-edit" title="Edit"></a>
+      <a href="/user/{{user._id}}" class="btn btn-issue glyphicon glyphicon-question-sign" title="Edit - this user is missing a Lat/Lng value"></a>
+    </div>
+    </td>
     <td>{{user.fname}}</td>
     <td>{{user.lname}}</td>
     <td>{{user.email}}</td>

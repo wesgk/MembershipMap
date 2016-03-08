@@ -74,7 +74,7 @@
  <div ng-repeat="address in user.addresses" ng-model="user.addresses" id="panel{{$index}}" >
     <div ng-init="address.formName='addressForm'+$index" ></div>
     <div class="row">
-      <google-maps-draggable address="user.addresses[$index]" addressIndex="$index"></google-maps-draggable>
+      <google-maps-draggable address="user.addresses[$index]" staticaddress="userSavedRecord.addresses[$index]" form="newUserForm" addressIndex="$index"></google-maps-draggable>
     </div>
     <div class="row">
       <div class="caption">Click &amp; drag marker to set address fields or type in address and save to verify marker location.  Lat/Lng values will auto populate on save.</div>
@@ -133,24 +133,33 @@
               </div>
             </span>
           </div> 
-          <div class="form-group">
+          <div class="form-group" ng-show="isAuthenticated">
             <span ng-class="{'has-error': newUserForm.postalCode.$error.required}">
               <label for="postalCode">Postal Code:</label>
               <input type="text" name="postalCode" ng-model="user.addresses[$index].postalCode" ng-minlength="6" class="form-control" />
               <span class="caption text-muted" ng-class="{'text-danger':address.formName.$dirty}">When typing in a new address, empty this field before saving</span>
             </span>
           </div>
-          <div class="form-group">
-            <span ng-class="{'has-error': newUserForm.lat.$error.required}">
+          <div class="form-group" ng-show="isAuthenticated">
+            <span ng-class="{'has-error': newUserForm.latlngModified}">
               <label for="lat">Latitude:</label>
               <input type="text" name="lat" ng-model="user.addresses[$index].lat" class="form-control" />
+              <span class="caption text-muted" ng-class="{'text-danger':address.formName.$dirty}">When typing in a new address, empty this field before saving</span>
+            </span>
+          </div>
+          <div class="form-group" ng-show="isAuthenticated">
+            <span ng-class="{'has-error': newUserForm.latlngModified}">
+              <label for="lng">Longitude:</label>
+              <input type="text" name="lng" ng-model="user.addresses[$index].lng" class="form-control" />
+              <span class="caption text-muted" ng-class="{'text-danger':address.formName.$dirty}">When typing in a new address, empty this field before saving</span>
             </span>
           </div>
           <div class="form-group">
-            <span ng-class="{'has-error': newUserForm.lng.$error.required}">
-              <label for="lng">Longitude:</label>
-              <input type="text" name="lng" ng-model="user.addresses[$index].lng" class="form-control" />
-            </span>
+            <div class="alert alert-danger" role="alert" ng-show="newUserForm.latlngModified">
+              <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+              <span class="sr-only">Error:</span>
+              Lat/Lng values have been auto-generated.  Press the save/update button to save these Lat/Lng values and have this member appear on the user map.
+            </div>
           </div>
           <div class="form-group">
             <div class="col-sm-8">

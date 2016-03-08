@@ -9,7 +9,7 @@
         {{item.title}}
     </th>
   </tr>
-  <tr ng-repeat="user in users | orderBy : sort.column : sort.descending">
+  <tr ng-repeat="user in users | orderBy : sort.column : sort.descending" ng-class="{{missingCoords(user) ? 'danger' : 'info'}}">
     <td><input type="checkbox" checked="true"></td>
     <td>{{user.fname}}</td>
     <td>{{user.lname}}</td>

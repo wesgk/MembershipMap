@@ -44,10 +44,22 @@ th[ng-click]:hover {
 
 /*= Styles
 ------------------*/
+.hidden {
+  display: none; }
+
 .caption {
   margin: 0.6em 0;
   font-style: italic;
   font-size: 0.95em; }
+
+.btn-issue {
+  display: none; }
+
+.has-issue .btn-issue {
+  display: block; }
+
+.has-issue .btn-edit {
+  display: none; }
 
 /*= MQ
 ------------------*/

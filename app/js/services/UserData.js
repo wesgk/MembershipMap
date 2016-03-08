@@ -191,6 +191,16 @@ myApp.factory('userData',
     return fname + lname + '<br>' + telephone + '<br>' + buildingNumber + streetName + '<br>' + city + province + '<br>' + country + postalCode ;
   };
 
+  var missingCoords = function(rec){
+    var lat = rec.addresses[rec.defaultAddress].lat;
+    var lng = rec.addresses[rec.defaultAddress].lng;
+    if(lat.length === 0 || lng.length === 0){
+      return true;
+    }else{
+      return false;
+    }
+  };
+
   return {
     user: user,
     userTypes: userTypes,
@@ -222,6 +232,7 @@ myApp.factory('userData',
     removeAddress: removeAddress,
     getProvincePos: getProvincePos,
     getFormattedAddress: getFormattedAddress,
-    getFormattedContent: getFormattedContent
+    getFormattedContent: getFormattedContent,
+    missingCoords: missingCoords
   };  
 });

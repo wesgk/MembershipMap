@@ -7,6 +7,9 @@ myApp.controller("UserController",
   }
 
   $scope.user = userData.user; // user schema 
+  $scope.userDbRecord = {}; // this will be upated on each save to reflect the content saved in the DB
+  // necessary to flag the user when LatLng values have been auto-populated but not saved
+  $scope.dbSynced = '';
   $scope.provinces = provinces;
   $scope.selectedProvince = angular.copy($scope.provinces[0].abbreviation);
   $scope.user.defaultAddress = 0; // auto-set 1st address as default
@@ -22,8 +25,11 @@ myApp.controller("UserController",
   function getUser (id){
     userData.getUser(id, function (user){
       $scope.user = user;
+      // $scope.userDbRecord = user; // used to flag unsaved fields (lat/lng)
       $scope.user.id = $scope.user._id; // handle mongoDB auto id
       setSelectedProvinces($scope.user.addresses); // set province dropdown to selected
+
+      angular.copy($scope.user, $scope.userDbRecord);
     });
   }
   
@@ -65,6 +71,18 @@ myApp.controller("UserController",
       }
     }
   }
+
+  $scope.isLatLngSaved = function(user){
+    // var savedAddress = $scope.userDbRecord.addresses[$scope.userDbRecord.defaultAddress];
+    var savedAddress = 'test';
+    
+    var scopeAddress = $scope.user.addresses[$scope.user.defaultAddress];
+    if(savedAddress.lat !== scopeAddress.lat || savedAddress.lng !== scopeAddress.lng){
+      return false;
+    }else{
+      return true;
+    }
+  };
 
   $scope.addAddress = function (addresses){
     userData.addAddress(addresses);

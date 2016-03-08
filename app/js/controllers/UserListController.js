@@ -39,6 +39,10 @@ myApp.controller("UserListController",
     {
       column: 'city',
       title: 'City'
+    },
+    {
+      column: '',
+      title: ''
     }];
     
   var getAllUsers = function (){ 
@@ -76,6 +80,10 @@ myApp.controller("UserListController",
         sort.column = column;
         sort.descending = false;
     }
+  };
+
+  $scope.missingCoords = function(user){
+    return userData.missingCoords(user);
   };
 
   getAllUsers();

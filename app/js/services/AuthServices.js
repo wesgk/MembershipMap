@@ -37,10 +37,12 @@ myApp.factory('authLogin',
   };
 
   var isAuthenticated = function () {
+    // return true; // always true
     return $rootScope.isAuthenticated;
   };
 
   var isAdmin = function () {
+    // return true; // always true
     return $rootScope.isAdmin;
   };
 
